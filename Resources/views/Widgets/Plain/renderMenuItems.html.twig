@@ -1,0 +1,12 @@
+<ul>
+  {% for node in items %}
+    <li id="{{ node.id }}">
+      <a href="{{ node.url|raw }}">
+        {{ node.text }}
+      </a>
+      {% if node.__children|length > 0 %}
+      	{% include 'ArnmMenuBundle:Widgets\\Plain:renderMenuItems.html.twig' with {'items': node.__children} %}
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul> 

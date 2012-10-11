@@ -1,0 +1,13 @@
+{% set type = type|default('root') %}
+<ul>
+  {% for node in tree %}
+    <li id="{{ node.id }}">
+      <a href="#" rel="{{ type }}">
+        {{ node.text }}
+      </a>
+      {% if node.__children|length > 0 %}
+      	{% include 'ArnmMenuBundle:Menu:renderTree.html.twig' with {'tree': node.__children, 'type': 'node'} %}
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

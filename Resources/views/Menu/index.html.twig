@@ -1,0 +1,50 @@
+{% extends 'ArnmAraneumBundle::araneum.html.twig' %}
+
+{% block title %}
+	{{ parent() }} | Menu Admin
+{% endblock %}
+
+{% block sidebar %}
+	<div class="alert alert-info hint">
+		<span class="label label-info">{{ 'default.label.info'|trans }}</span><br/>
+  		{{ 'menu.info'|trans({}, 'menu')|raw }}
+	</div>
+{% endblock %}
+ 
+{% block content %}
+	<div class="page-header">
+		<h2>{{ 'menu.list.title'|trans({}, 'menu') }}</h2>
+	</div>
+	
+	{% include 'ArnmAraneumBundle:Misc:messages.html.twig' %}
+	
+	<table class="table table-striped table-bordered table-condensed">
+	    <thead>
+	        <tr>
+	            <th>#</th>
+	            <th>{{ 'menu.list.table.head.code'|trans({}, 'menu') }}</th>
+	            <th>{{ 'menu.list.table.head.class'|trans({}, 'menu') }}</th>
+	            <th>{{ 'default.label.actions'|trans }}</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    {% for entity in entities %}
+	        <tr>
+	            <td>{{ entity.id }}</td>
+	            <td>{{ entity.code }}</td>
+	            <td>{{ entity.class }}</td>
+	            <td>
+	            	<a href="{{ path('armn_menu', { 'id': entity.id }) }}" class="btn">{{ 'menu.list.action.items'|trans({}, 'menu') }}</a>
+	            	<a href="{{ path('arnm_menu_delete', { 'id': entity.id }) }}" class="btn btn-danger delete-confirm">{{ 'default.label.delete'|trans }}</a>
+	            </td>
+	        </tr>
+	    {% endfor %}
+	    </tbody>
+	</table>
+	
+	<div class="well">
+	    <a href="{{ path('arnm_menu_new') }}" class="btn btn-primary">
+	        {{ 'menu.list.action.create_new'|trans({}, 'menu') }}
+	    </a>
+    </div>
+{% endblock %}

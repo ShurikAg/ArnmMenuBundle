@@ -1,0 +1,47 @@
+{% extends 'ArnmAraneumBundle::araneum.html.twig' %}
+
+{% block title %}
+	{{ parent() }} | Menu Items Admin
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	<link href="{{ asset('bundles/arnmaraneum/treesorter/css/treesorter.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+    <script src="{{ asset('bundles/arnmaraneum/treesorter/jquery.jstree.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/arnmaraneum/treesorter/treesorter.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block sidebar %}
+	<div class="alert alert-info hint">
+		<span class="label label-info">{{ 'default.label.info'|trans }}</span>
+  		{{ 'menu.items.info'|trans({}, 'menu')|raw }}
+	</div>
+{% endblock %}
+ 
+{% block content %}
+	<div class="page-header">
+		<h2>{{ 'menu.items.title'|trans({}, 'menu') }}</h2>
+	</div>
+	{% include 'ArnmAraneumBundle:Misc:messages.html.twig' %}
+	{% if tree|length > 0 %}
+	  <div class="pages-tree-container">
+		  <div id="root">
+		  	<div class="template" id="tree-item-tools">
+	          <span class="tree-actions">
+	             <span class="edit-item" href="{{ path('armn_menu_item_edit', { 'id': menu.id, 'itemId': '1' }) }}">{{ 'menu.tree.action.edit_item'|trans({}, 'menu') }}</span>
+	             <span class="add-sub-item" href="{{ path('armn_menu_item_add', { 'id': menu.id, 'parentId': '1' }) }}">{{ 'menu.tree.action.add_subitem'|trans({}, 'menu') }}</span>
+	             <span class="delete" href="{{ path('armn_menu_item_delete', { 'id': menu.id, 'itemId': '1' }) }}">{{ 'menu.tree.action.delete'|trans({}, 'menu') }}</span>
+	           </span>
+	        </div>
+		    <div class="sortable-tree">
+		      {% include 'ArnmMenuBundle:Menu:renderTree.html.twig' with {'tree': tree} %}
+		    </div>
+		  </div>
+	  </div>
+	  <script type="text/javascript">
+		var nodeSortPostUrl = '{{ path('armn_menu_item_sort', { 'id': menu.id }) }}';
+	  </script>
+	{% endif%}
+{% endblock %}

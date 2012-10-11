@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="menu.en.xlf">
+        <body>
+            <trans-unit id="1">
+                <source>menu.info</source>
+                <target>Menus managed through this page.</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>menu.list.title</source>
+                <target>Menus List</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>menu.list.table.head.code</source>
+                <target>Code (unique)</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>menu.list.table.head.class</source>
+                <target>CSS Class</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>menu.list.action.create_new</source>
+                <target>Create New</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>menu.form.code.label</source>
+                <target>Code</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>menu.form.code.help</source>
+                <target>Uniquely identifiable code. This code is used for menu rendering functionality.</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>menu.form.class.label</source>
+                <target>CSS Class</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>menu.form.class.help</source>
+                <target>CSS Class name that used for menu styling. Might be multiple space separated values.</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>menu.form.title.new</source>
+                <target>New Menu</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>menu.form.action.create</source>
+                <target>Create</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>menu.new.info</source>
+                <target>First the menu entity have to be created before it can be filled with items.</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>menu.list.action.items</source>
+                <target>Items</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>menu.tree.action.add_subitem</source>
+                <target>Add Sub-Item</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>menu.items.info</source>
+                <target><![CDATA[<p>This page allows full adnimistration of a single menu.</p><p>Menu items may be added, deleted or reordered.</p>]]></target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>menu.items.title</source>
+                <target>Menu Structure Admin</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>menu.tree.action.edit_item</source>
+                <target>Edit</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>menu.tree.action.delete</source>
+                <target>Delete</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>menu.item.edit.info </source>
+                <target><![CDATA[<p>Menu item can be updated at any time.</p>]]></target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>menu.item.form.title.edit</source>
+                <target>Edit Menu Item</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>menu.item.form.text.label</source>
+                <target>Item Text</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>menu.item.form.text.help</source>
+                <target>This text will be the text of the item's link</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>menu.item.form.url.label</source>
+                <target>Target Url</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>menu.item.form.url.help</source>
+                <target>Absolute or relative URL. Could be external as well.</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>menu.item.new.info</source>
+                <target><![CDATA[<p>Menu item is usually a link or a button in a menu.</p><p>The text of the item must be provided</p>]]></target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>menu.item.form.title.new</source>
+                <target>New Menu Item</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>menu_widget.form.title.label</source>
+                <target>Widget Title</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>menu_widget.form.title.help</source>
+                <target>Widget title that should be rendered on the site.</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>menu_widget.form.menu.label</source>
+                <target>Menu</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>menu_widget.form.menu.help</source>
+                <target>Select menu to be rendered.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

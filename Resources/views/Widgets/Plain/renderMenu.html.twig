@@ -1,0 +1,10 @@
+{% if menu is defined%}
+	<div class="{{ menu.class }}">
+		{% if title is defined%}
+			<div class="title">
+				{{ title }}
+			</div>
+		{% endif %}
+		{% include 'ArnmMenuBundle:Widgets\\Plain:renderMenuItems.html.twig' with {'items': items} %}
+	</div>
+{% endif %}

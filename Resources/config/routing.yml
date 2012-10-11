@@ -1,0 +1,59 @@
+arnm_menus:
+    pattern:  /araneum/menus
+    defaults: { _controller: ArnmMenuBundle:Menu:index }
+arnm_menu_new:
+    pattern:  /araneum/menu/new
+    defaults: { _controller: ArnmMenuBundle:Menu:new }
+arnm_menu_delete:
+    pattern:  /araneum/menu/{id}/delete
+    defaults: { _controller: ArnmMenuBundle:Menu:delete }
+    requirements:
+        id:  \d+
+armn_menu:
+    pattern: /araneum/menu/{id}/items
+    defaults: { _controller: ArnmMenuBundle:Menu:items }
+    requirements:
+        id:  \d+
+armn_menu_item_add:
+    pattern: /araneum/menu/{id}/item/add/{parentId}
+    defaults: { _controller: ArnmMenuBundle:Menu:addItem }
+    requirements:
+        id:  \d+
+armn_menu_item_edit:
+    pattern: /araneum/menu/{id}/item/edit/{itemId}
+    defaults: { _controller: ArnmMenuBundle:Menu:editItem }
+    requirements:
+        id:  \d+
+        itemId:  \d+
+armn_menu_item_delete:
+    pattern: /araneum/menu/{id}/item/delete/{itemId}
+    defaults: { _controller: ArnmMenuBundle:Menu:deleteItem }
+    requirements:
+        id:  \d+
+        itemId:  \d+
+armn_menu_item_sort:
+    pattern:  /araneum/menu/{id}/item/sort
+    defaults: { _controller: ArnmMenuBundle:Menu:sortItem }
+    requirements:
+        id:  \d+
+        
+        
+# Widgets
+widget_Menu_PlainMenu_edit:
+    pattern:  /araneum/widget/Menu/edit/{id}
+    defaults: { _controller: ArnmMenuBundle:Widgets\PlainMenu:edit }
+    requirements:
+        id:  \d+
+        _method:  GET
+widget_Menu_PlainMenu_update:
+    pattern:  /araneum/widget/Menu/update/{id}
+    defaults: { _controller: ArnmMenuBundle:Widgets\PlainMenu:edit }
+    requirements:
+        id:  \d+
+        _method:  POST
+widget_Menu_PlainMenu_delete:
+    pattern:  /araneum/widget/Menu/delete/{id}
+    defaults: { _controller: ArnmMenuBundle:Widgets\PlainMenu:delete }
+    requirements:
+        id:  \d+
+        _method:  POST
