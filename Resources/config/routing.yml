@@ -39,19 +39,19 @@ armn_menu_item_sort:
         
         
 # Widgets
-widget_Menu_PlainMenu_edit:
+widget_ArnmMenu_PlainMenu_edit:
     pattern:  /araneum/widget/Menu/edit/{id}
     defaults: { _controller: ArnmMenuBundle:Widgets\PlainMenu:edit }
     requirements:
         id:  \d+
         _method:  GET
-widget_Menu_PlainMenu_update:
+widget_ArnmMenu_PlainMenu_update:
     pattern:  /araneum/widget/Menu/update/{id}
     defaults: { _controller: ArnmMenuBundle:Widgets\PlainMenu:edit }
     requirements:
         id:  \d+
         _method:  POST
-widget_Menu_PlainMenu_delete:
+widget_ArnmMenu_PlainMenu_delete:
     pattern:  /araneum/widget/Menu/delete/{id}
     defaults: { _controller: ArnmMenuBundle:Widgets\PlainMenu:delete }
     requirements:
