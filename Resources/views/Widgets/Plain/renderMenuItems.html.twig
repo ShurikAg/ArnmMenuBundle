@@ -1,7 +1,7 @@
 <ul>
   {% for node in items %}
     <li id="{{ node.id }}">
-      <a href="{{ node.url|raw }}">
+      <a href="{% if node.url is empty %}#{% else %}{{ node.url|raw }}{% endif %}">
         {{ node.text }}
       </a>
       {% if node.__children|length > 0 %}
