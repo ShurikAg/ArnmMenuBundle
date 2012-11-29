@@ -279,6 +279,57 @@ class MenuController extends ArnmController
     }
 
     /**
+     * Deletes Menu Item
+     *
+     * @param int $id
+     * @param int $itemId
+     *
+     * @return Response
+     */
+    public function deleteItemAction($id, $itemId)
+    {
+        $menu = $this->getMenuManager()
+            ->getMenuRepository()
+            ->findOneById($id);
+        if (! ($menu instanceof Menu)) {
+            throw $this->createNotFoundException("Menu was not found!");
+        }
+        //find the item
+        $item = $this->getMenuManager()
+            ->getItemRepository()
+            ->findOneById($itemId);
+        if (! ($item instanceof Item)) {
+            throw $this->createNotFoundException("Menu item was not found!");
+        }
+
+        //check if the item is a part of the right menu
+        if ($item->getMenu() != $menu) {
+            throw new \RuntimeException("Menu item does not belong to requested menu!");
+        }
+
+        //remove the item from the tree and delete it
+        if($item->childCount() === 0){
+            $em = $this->getEntityManager();
+            $em->remove($item);
+            $em->clear();
+
+            $this->getSession()
+                ->getFlashBag()
+                ->add('notice', $this->get('translator')
+                ->trans('menu.item.message.delete.success', array(), 'menu'));
+        } else {
+            $this->getSession()
+                ->getFlashBag()
+                ->add('error', $this->get('translator')
+                ->trans('menu.item.message.delete.cannot_delete', array(), 'menu'));
+        }
+
+        return $this->redirect($this->generateUrl('armn_menu', array(
+            'id' => $menu->getId()
+        )));
+    }
+
+    /**
      * Handles ajax request for sorting of a tree nodes
      *
      * @param Request $request

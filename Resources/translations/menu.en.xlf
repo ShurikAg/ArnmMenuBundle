@@ -154,6 +154,14 @@
                 <source>menu.message.delete.fail</source>
                 <target>Failed to delete menu!</target>
             </trans-unit>
+            <trans-unit id="39">
+                <source>menu.item.message.delete.success</source>
+                <target>Menu item has been successfully deleted!</target>
+            </trans-unit>
+            <trans-unit id="40">
+                <source>menu.item.message.delete.cannot_delete</source>
+                <target>Cannot delete menu item that have sub items.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
