@@ -122,6 +122,38 @@
                 <source>menu_widget.form.menu.help</source>
                 <target>Select menu to be rendered.</target>
             </trans-unit>
+            <trans-unit id="31">
+                <source>menu.message.create.success</source>
+                <target>Menu has been created successfuly.</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>menu.message.update.success</source>
+                <target>Menu has been updated successfuly.</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>menu.edit.info</source>
+                <target><![CDATA[<p>Update menu details.</p>]]></target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>menu.form.title.edit</source>
+                <target>Edit Menu</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>menu.form.action.update</source>
+                <target>Update</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>menu.delete.confirm.message</source>
+                <target>Are you sure you want to delete menu? This action will also remove all the elements of this menu.</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>menu.message.delete.success</source>
+                <target>Menu has been deleted successfuly.</target>
+            </trans-unit>
+            <trans-unit id="38">
+                <source>menu.message.delete.fail</source>
+                <target>Failed to delete menu!</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -4,6 +4,11 @@ arnm_menus:
 arnm_menu_new:
     pattern:  /araneum/menu/new
     defaults: { _controller: ArnmMenuBundle:Menu:new }
+arnm_menu_edit:
+    pattern:  /araneum/menu/{id}/edit
+    defaults: { _controller: ArnmMenuBundle:Menu:edit }
+    requirements:
+        id:  \d+
 arnm_menu_delete:
     pattern:  /araneum/menu/{id}/delete
     defaults: { _controller: ArnmMenuBundle:Menu:delete }

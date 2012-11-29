@@ -34,7 +34,7 @@ class MenuController extends ArnmController
     }
 
     /**
-     * Shows a from for menu creation
+     * Shows a from for menu editing
      *
      * @return Response
      */
@@ -43,9 +43,9 @@ class MenuController extends ArnmController
         $menu = new Menu();
         $form = $this->createForm(new MenuType(), $menu);
 
-        if($this->getRequest()->getMethod() === 'POST') {
+        if ($this->getRequest()->getMethod() === 'POST') {
             $form->bindRequest($this->getRequest());
-            if($form->isValid()) {
+            if ($form->isValid()) {
                 $em = $this->getDoctrine()->getEntityManager();
 
                 //create the root item for this menu
@@ -56,6 +56,11 @@ class MenuController extends ArnmController
                 $em->persist($root);
                 $em->flush();
 
+                $this->getSession()
+                    ->getFlashBag()
+                    ->add('notice', $this->get('translator')
+                    ->trans('menu.message.create.success', array(), 'menu'));
+
                 return $this->redirect($this->generateUrl('arnm_menus'));
             }
         }
@@ -63,6 +68,89 @@ class MenuController extends ArnmController
             'menu' => $menu,
             'form' => $form->createView()
         ));
+    }
+
+    /**
+     * Shows a from for menu creation
+     *
+     * @return Response
+     */
+    public function editAction($id)
+    {
+        $menu = $this->getMenuManager()
+            ->getMenuRepository()
+            ->findOneById($id);
+        if (! ($menu instanceof Menu)) {
+            throw $this->createNotFoundException("Menu was not found!");
+        }
+        $form = $this->createForm(new MenuType(), $menu);
+
+        if ($this->getRequest()->getMethod() === 'POST') {
+            $form->bindRequest($this->getRequest());
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getEntityManager();
+
+                //create the root item for this menu
+                $em->persist($menu);
+                $em->flush();
+
+                $this->getSession()
+                    ->getFlashBag()
+                    ->add('notice', $this->get('translator')
+                    ->trans('menu.message.update.success', array(), 'menu'));
+
+                return $this->redirect($this->generateUrl('arnm_menu_edit', array(
+                    'id' => $menu->getId()
+                )));
+            }
+        }
+        return $this->render('ArnmMenuBundle:Menu:edit.html.twig', array(
+            'menu' => $menu,
+            'form' => $form->createView()
+        ));
+    }
+    /**
+     * Deletes menu including it's items
+     *
+     * @return Response
+     */
+    public function deleteAction($id)
+    {
+        $menu = $this->getMenuManager()
+            ->getMenuRepository()
+            ->findOneById($id);
+        if (! ($menu instanceof Menu)) {
+            throw $this->createNotFoundException("Menu was not found!");
+        }
+
+        $em = $this->getEntityManager();
+        $em->beginTransaction();
+
+        try {
+            foreach ($menu->getItems() as $item) {
+                $em->remove($item);
+            }
+            $em->remove($menu);
+            $em->flush();
+
+            $em->commit();
+
+            $this->getSession()
+                ->getFlashBag()
+                ->add('notice', $this->get('translator')
+                ->trans('menu.message.delete.success', array(), 'menu'));
+        } catch (\Exception $exc) {
+            $em->rollback();
+            $this->getSession()
+                ->getFlashBag()
+                ->add('error', $this->get('translator')
+                ->trans('menu.message.delete.fail', array(), 'menu'));
+            $this->getSession()
+                ->getFlashBag()
+                ->add('error', $exc->getMessage());
+        }
+
+        return $this->redirect($this->generateUrl('arnm_menus'));
     }
 
     /**
@@ -77,7 +165,7 @@ class MenuController extends ArnmController
         $menu = $this->getMenuManager()
             ->getMenuRepository()
             ->findOneById($id);
-        if(! ($menu instanceof Menu)) {
+        if (! ($menu instanceof Menu)) {
             throw $this->createNotFoundException("Menu was not found!");
         }
 
@@ -102,7 +190,7 @@ class MenuController extends ArnmController
         $menu = $this->getMenuManager()
             ->getMenuRepository()
             ->findOneById($id);
-        if(! ($menu instanceof Menu)) {
+        if (! ($menu instanceof Menu)) {
             throw $this->createNotFoundException("Menu was not found!");
         }
 
@@ -110,16 +198,16 @@ class MenuController extends ArnmController
         $parent = $this->getMenuManager()
             ->getItemRepository()
             ->findOneById($parentId);
-        if(! ($parent instanceof Item)) {
+        if (! ($parent instanceof Item)) {
             throw $this->createNotFoundException("Parent menu item was not found!");
         }
 
         $item = new Item();
         //create form
         $form = $this->createForm(new ItemType(), $item);
-        if($this->getRequest()->getMethod() === 'POST') {
+        if ($this->getRequest()->getMethod() === 'POST') {
             $form->bindRequest($this->getRequest());
-            if($form->isValid()) {
+            if ($form->isValid()) {
                 $em = $this->getDoctrine()->getEntityManager();
                 $item->setParent($parent);
                 $item->setMenu($menu);
@@ -152,27 +240,27 @@ class MenuController extends ArnmController
         $menu = $this->getMenuManager()
             ->getMenuRepository()
             ->findOneById($id);
-        if(! ($menu instanceof Menu)) {
+        if (! ($menu instanceof Menu)) {
             throw $this->createNotFoundException("Menu was not found!");
         }
         //find the item
         $item = $this->getMenuManager()
             ->getItemRepository()
             ->findOneById($itemId);
-        if(! ($item instanceof Item)) {
+        if (! ($item instanceof Item)) {
             throw $this->createNotFoundException("Menu item was not found!");
         }
 
         //check if the item is a part of the right menu
-        if($item->getMenu() != $menu) {
+        if ($item->getMenu() != $menu) {
             throw new \RuntimeException("Menu item does not belong to requested menu!");
         }
 
         //create form
         $form = $this->createForm(new ItemType(), $item);
-        if($this->getRequest()->getMethod() === 'POST') {
+        if ($this->getRequest()->getMethod() === 'POST') {
             $form->bindRequest($this->getRequest());
-            if($form->isValid()) {
+            if ($form->isValid()) {
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($item);
                 $em->flush();
@@ -199,7 +287,7 @@ class MenuController extends ArnmController
      */
     public function sortItemAction(Request $request, $id)
     {
-        if(! $request->isXmlHttpRequest() || $request->getMethod() != 'POST') {
+        if (! $request->isXmlHttpRequest() || $request->getMethod() != 'POST') {
             throw $this->createNotFoundException('Not valid Request');
         }
 
@@ -209,7 +297,7 @@ class MenuController extends ArnmController
 
         $reply = array();
         try {
-            if($this->getMenuManager()->sortItem($nodeId, $parentId, $index) === true) {
+            if ($this->getMenuManager()->sortItem($nodeId, $parentId, $index) === true) {
                 $reply['status'] = 'SUCCESS';
             }
 
@@ -227,7 +315,7 @@ class MenuController extends ArnmController
     /**
      * Gets menu manager object
      *
-     * @return MenuManager
+     * @return Arnm\MenuBundle\Manager\MenuManager
      */
     protected function getMenuManager()
     {

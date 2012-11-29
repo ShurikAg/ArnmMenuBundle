@@ -34,8 +34,9 @@
 	            <td>{{ entity.code }}</td>
 	            <td>{{ entity.class }}</td>
 	            <td>
-	            	<a href="{{ path('armn_menu', { 'id': entity.id }) }}" class="btn">{{ 'menu.list.action.items'|trans({}, 'menu') }}</a>
-	            	<a href="{{ path('arnm_menu_delete', { 'id': entity.id }) }}" class="btn btn-danger delete-confirm">{{ 'default.label.delete'|trans }}</a>
+	            	<a href="{{ path('armn_menu', { 'id': entity.id }) }}" class="btn btn-primary">{{ 'menu.list.action.items'|trans({}, 'menu') }}</a>
+	            	<a href="{{ path('arnm_menu_edit', { 'id': entity.id }) }}" class="btn">{{ 'default.label.edit'|trans }}</a>
+	            	<a href="{{ path('arnm_menu_delete', { 'id': entity.id }) }}" class="btn btn-danger delete-confirm" data-confirm-message="{{ 'menu.delete.confirm.message'|trans({}, 'menu') }}">{{ 'default.label.delete'|trans }}</a>
 	            </td>
 	        </tr>
 	    {% endfor %}
