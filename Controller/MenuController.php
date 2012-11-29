@@ -313,6 +313,7 @@ class MenuController extends ArnmController
             ->childCount($item) === 0) {
             $em = $this->getEntityManager();
             $em->remove($item);
+            $em->flush();
             $em->clear();
 
             $this->getSession()
