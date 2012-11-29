@@ -308,7 +308,9 @@ class MenuController extends ArnmController
         }
 
         //remove the item from the tree and delete it
-        if($item->childCount() === 0){
+        if ($this->getMenuManager()
+            ->getItemRepository()
+            ->childCount($item) === 0) {
             $em = $this->getEntityManager();
             $em->remove($item);
             $em->clear();

@@ -160,7 +160,11 @@
             </trans-unit>
             <trans-unit id="40">
                 <source>menu.item.message.delete.cannot_delete</source>
-                <target>Cannot delete menu item that have sub items.</target>
+                <target>Can't delete menu item that have sub items.</target>
+            </trans-unit>
+            <trans-unit id="41">
+                <source>menu.item.delete.confirm.message</source>
+                <target>Are you sure you want to delete this item?</target>
             </trans-unit>
         </body>
     </file>

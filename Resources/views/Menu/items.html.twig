@@ -32,7 +32,7 @@
 	          <span class="tree-actions">
 	             <span class="edit-item" href="{{ path('armn_menu_item_edit', { 'id': menu.id, 'itemId': '1' }) }}">{{ 'menu.tree.action.edit_item'|trans({}, 'menu') }}</span>
 	             <span class="add-sub-item" href="{{ path('armn_menu_item_add', { 'id': menu.id, 'parentId': '1' }) }}">{{ 'menu.tree.action.add_subitem'|trans({}, 'menu') }}</span>
-	             <span class="delete" href="{{ path('armn_menu_item_delete', { 'id': menu.id, 'itemId': '1' }) }}">{{ 'menu.tree.action.delete'|trans({}, 'menu') }}</span>
+	             <span class="delete delete-confirm" href="{{ path('armn_menu_item_delete', { 'id': menu.id, 'itemId': '1' }) }}" data-confirm-message="{{ 'menu.item.delete.confirm.message'|trans({}, 'menu') }}">{{ 'menu.tree.action.delete'|trans({}, 'menu') }}</span>
 	           </span>
 	        </div>
 		    <div class="sortable-tree">
