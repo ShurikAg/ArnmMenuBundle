@@ -81,7 +81,7 @@ class MenuManager
      */
     public function getMenuRepository()
     {
-        if(is_null($this->menuRepository)) {
+        if (is_null($this->menuRepository)) {
             $this->menuRepository = $this->getEntityManager()->getRepository('ArnmMenuBundle:Menu');
         }
         return $this->menuRepository;
@@ -95,7 +95,7 @@ class MenuManager
      */
     public function getItemRepository()
     {
-        if(is_null($this->itemRepository)) {
+        if (is_null($this->itemRepository)) {
             $this->itemRepository = $this->getEntityManager()->getRepository('ArnmMenuBundle:Item');
         }
         return $this->itemRepository;
@@ -116,7 +116,53 @@ class MenuManager
         return $this->getItemRepository()->childrenHierarchy($root, false, array(), $includeRoot);
     }
 
-/**
+    /**
+     * Marks item/s active according to the given URL path
+     * If the given path is empty or not provided, nothing is marked
+     *
+     * @param array  $items   Array of menu items
+     * @param string $urlPath PATH path of the url
+     */
+    public function markActive(array $items = array(), $urlPath = null)
+    {
+        if(empty($urlPath)){
+            return $items;
+        }
+
+        $this->doMarkMatching($items, $urlPath);
+
+        return $items;
+    }
+
+    /**
+     * Does the actual job of marking the matching item by URL
+     *
+     * @param array  $items   Array of menu items
+     * @param string $urlPath Path to match
+     *
+     * @return boolean
+     */
+    private function doMarkMatching(array &$items = array(), $urlPath)
+    {
+        foreach ($items as &$item){
+            if($item['url'] === $urlPath) {
+                $item['current'] = true;
+                return true;
+            }
+
+            $matchFoundInChildren = false;
+            if(isset($item['__children']) && is_array($item['__children'])){
+                $matchFoundInChildren = $this->doMarkMatching($item['__children'], $urlPath);
+            }
+
+            if($matchFoundInChildren === true) {
+                $item['current-parent'] = true;
+                return true;
+            }
+        }
+    }
+
+    /**
      * Handles the sorting logic
      *
      * @param int $nodeId
@@ -134,18 +180,18 @@ class MenuManager
         $item = $repo->findOneById($nodeId);
         $parent = $repo->findOneById($parentId);
 
-        if(! ($item instanceof Item) || ! ($parent instanceof Item) || $index < 0) {
+        if (! ($item instanceof Item) || ! ($parent instanceof Item) || $index < 0) {
             throw new \InvalidArgumentException('Could not find one(or more) of required nodes!');
         }
 
-        if($index == 0) {
+        if ($index == 0) {
             $repo->persistAsFirstChildOf($item, $parent);
         } else {
             //get all the children for parent
             $children = $repo->children($parent, true);
 
             //find the sibling the will eventually become a previous sibling to the item
-            if(! ($children[$index - 1] instanceof Item)) {
+            if (! ($children[$index - 1] instanceof Item)) {
                 throw new \InvalidArgumentException('Could not find one(or more) of required nodes!');
             }
 

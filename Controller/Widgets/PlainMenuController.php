@@ -1,6 +1,8 @@
 <?php
 namespace Arnm\MenuBundle\Controller\Widgets;
 
+use Symfony\Component\HttpFoundation\Request;
+
 use Symfony\Component\HttpFoundation\Response;
 use Arnm\MenuBundle\Entity\Menu;
 use Arnm\MenuBundle\Model\MenuWidget;
@@ -181,6 +183,8 @@ class PlainMenuController extends ArnmWidgetController
         }
 
         $items = $menuMgr->fetchItemsTreeForMenu($menu, false);
+        $menuMgr->markActive($items, $this->getRequest()->getPathInfo());
+
 
         if(empty($items)) {
             return new Response("");
