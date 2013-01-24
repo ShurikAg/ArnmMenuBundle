@@ -156,7 +156,7 @@ class MenuManager
             }
 
             if($matchFoundInChildren === true) {
-                $item['current-parent'] = true;
+                $item['current_parent'] = true;
                 return true;
             }
         }

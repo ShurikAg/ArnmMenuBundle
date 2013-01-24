@@ -64,17 +64,17 @@ class MenuManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(isset($marked[3]['current']));
 
         $marked = $mgr->markActive($items, '/service.html');
-        $this->assertTrue(isset($marked[0]['current-parent']));
-        $this->assertTrue($marked[0]['current-parent']);
+        $this->assertTrue(isset($marked[0]['current_parent']));
+        $this->assertTrue($marked[0]['current_parent']);
         $this->assertFalse(isset($marked[0]['__children'][0]['current']));
         $this->assertTrue(isset($marked[0]['__children'][1]['current']));
         $this->assertTrue($marked[0]['__children'][1]['current']);
         $this->assertFalse(isset($marked[1]['current']));
-        $this->assertFalse(isset($marked[1]['current-parent']));
+        $this->assertFalse(isset($marked[1]['current_parent']));
         $this->assertFalse(isset($marked[2]['current']));
-        $this->assertFalse(isset($marked[2]['current-parent']));
+        $this->assertFalse(isset($marked[2]['current_parent']));
         $this->assertFalse(isset($marked[3]['current']));
-        $this->assertFalse(isset($marked[3]['current-parent']));
+        $this->assertFalse(isset($marked[3]['current_parent']));
     }
 
 }

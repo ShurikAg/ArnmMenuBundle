@@ -183,7 +183,7 @@ class PlainMenuController extends ArnmWidgetController
         }
 
         $items = $menuMgr->fetchItemsTreeForMenu($menu, false);
-        $menuMgr->markActive($items, $this->getRequest()->getPathInfo());
+        $items = $menuMgr->markActive($items, $this->getRequest()->getPathInfo());
 
 
         if(empty($items)) {

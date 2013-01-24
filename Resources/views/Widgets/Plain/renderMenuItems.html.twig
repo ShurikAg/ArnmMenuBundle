@@ -1,6 +1,6 @@
 <ul>
   {% for node in items %}
-    <li id="{{ node.id }}">
+    <li id="{{ node.id }}" class="{% if (node['current_parent'] is defined and node['current_parent'] == true) %}active-parent{% elseif (node['current'] is defined and node['current'] == true) %}active{% endif %}">
       <a href="{% if node.url is empty %}#{% else %}{{ node.url|raw }}{% endif %}">
         {{ node.text }}
       </a>

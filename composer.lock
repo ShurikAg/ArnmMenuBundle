@@ -25,7 +25,6 @@
                     "dev-master": "2.3.x-dev"
                 }
             },
-            "installation-source": "dist",
             "autoload": {
                 "psr-0": {
                     "Doctrine\\Common": "lib/"
@@ -72,35 +71,35 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "2.3.0",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal",
-                "reference": "2.3.0"
+                "reference": "2.3.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/dbal/zipball/2.3.0",
-                "reference": "2.3.0",
+                "url": "https://github.com/doctrine/dbal/archive/2.3.2.zip",
+                "reference": "2.3.2",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
                 "doctrine/common": "2.3.*"
             },
-            "time": "2012-09-20 05:56:37",
+            "time": "2013-01-07 20:03:43",
             "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.3.x-dev"
                 }
             },
-            "installation-source": "dist",
             "autoload": {
                 "psr-0": {
                     "Doctrine\\DBAL": "lib/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -135,16 +134,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "2.3.0",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "git://github.com/doctrine/doctrine2.git",
-                "reference": "2.3.0"
+                "reference": "2.3.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/doctrine/doctrine2/zipball/2.3.0",
-                "reference": "2.3.0",
+                "url": "https://github.com/doctrine/doctrine2/archive/2.3.2.zip",
+                "reference": "2.3.2",
                 "shasum": ""
             },
             "require": {
@@ -156,7 +155,7 @@
             "suggest": {
                 "symfony/yaml": "If you want to use YAML Metadata Mapping Driver"
             },
-            "time": "2012-09-20 06:03:34",
+            "time": "2013-01-07 20:05:04",
             "bin": [
                 "bin/doctrine",
                 "bin/doctrine.php"
@@ -167,12 +166,12 @@
                     "dev-master": "2.3.x-dev"
                 }
             },
-            "installation-source": "dist",
             "autoload": {
                 "psr-0": {
                     "Doctrine\\ORM": "lib/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -205,46 +204,54 @@
         },
         {
             "name": "gedmo/doctrine-extensions",
-            "version": "v2.3.2",
+            "version": "v2.3.3",
             "source": {
                 "type": "git",
                 "url": "git://github.com/l3pp4rd/DoctrineExtensions.git",
-                "reference": "v2.3.2"
+                "reference": "v2.3.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/l3pp4rd/DoctrineExtensions/zipball/v2.3.2",
-                "reference": "v2.3.2",
+                "url": "https://github.com/l3pp4rd/DoctrineExtensions/archive/v2.3.3.zip",
+                "reference": "v2.3.3",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
-                "doctrine/common": ">=2.1,<2.4-dev"
+                "doctrine/common": ">=2.2,<2.5-dev"
+            },
+            "require-dev": {
+                "doctrine/mongodb": ">=1.0.0-BETA1",
+                "doctrine/mongodb-odm": ">=1.0.0-BETA6",
+                "doctrine/orm": ">=2.2",
+                "doctrine/dbal": ">=2.2"
             },
             "suggest": {
-                "doctrine/orm": ">=2.1",
-                "doctrine/mongodb-odm": "*"
+                "doctrine/mongodb": ">=1.0.0-BETA1",
+                "doctrine/mongodb-odm": ">=1.0.0-BETA6",
+                "doctrine/orm": ">=2.2",
+                "doctrine/dbal": ">=2.2"
             },
-            "time": "2012-07-13 22:26:40",
+            "time": "2012-12-18 21:02:17",
             "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.3.x-dev"
                 }
             },
-            "installation-source": "dist",
             "autoload": {
                 "psr-0": {
                     "Gedmo": "lib/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
                     "name": "Gediminas Morkevicius",
-                    "email": "gediminas.morkevicius@gmail"
+                    "email": "gediminas.morkevicius@gmail.com"
                 }
             ],
             "description": "Doctrine2 behavioral extensions",
@@ -270,26 +277,26 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/ShurikAg/ArnmCoreBundle.git",
-                "reference": "0743158f78e2d1daa483c4dc1988624f9976090c"
+                "reference": "8c6ab6251470a2b8ba7953947b974e2c0341743b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/ShurikAg/ArnmCoreBundle/zipball/0743158f78e2d1daa483c4dc1988624f9976090c",
-                "reference": "0743158f78e2d1daa483c4dc1988624f9976090c",
+                "url": "https://github.com/ShurikAg/ArnmCoreBundle/archive/8c6ab6251470a2b8ba7953947b974e2c0341743b.zip",
+                "reference": "8c6ab6251470a2b8ba7953947b974e2c0341743b",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
                 "symfony/symfony": "2.1.*"
             },
-            "time": "1349508134",
+            "time": "2012-11-29 09:22:22",
             "type": "library",
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Arnm\\CoreBundle": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
                     "name": "Alex Agulyansky",
@@ -307,12 +314,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/ShurikAg/ArnmPagesBundle.git",
-                "reference": "b13705c8af5fe6ca051e51a67f0a0e625362a7cb"
+                "reference": "ee1e3b2c11d6cf962e82d13c903185e9c02ba292"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/ShurikAg/ArnmPagesBundle/zipball/b13705c8af5fe6ca051e51a67f0a0e625362a7cb",
-                "reference": "b13705c8af5fe6ca051e51a67f0a0e625362a7cb",
+                "url": "https://github.com/ShurikAg/ArnmPagesBundle/archive/ee1e3b2c11d6cf962e82d13c903185e9c02ba292.zip",
+                "reference": "ee1e3b2c11d6cf962e82d13c903185e9c02ba292",
                 "shasum": ""
             },
             "require": {
@@ -320,16 +327,17 @@
                 "symfony/symfony": "2.1.*",
                 "doctrine/orm": ">=2.2.3,<2.4-dev",
                 "stof/doctrine-extensions-bundle": "dev-master",
-                "iibs/arnm-core": "dev-master"
+                "iibs/arnm-core": "dev-master",
+                "stfalcon/tinymce-bundle": "v0.2.0"
             },
-            "time": "1349943989",
+            "time": "2012-11-20 09:36:24",
             "type": "library",
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Arnm\\PagesBundle": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
                     "name": "Alex Agulyansky",
@@ -347,12 +355,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/ShurikAg/ArnmWidgetBundle.git",
-                "reference": "b55bc7316d02b88acc6a823af17ef529cf642b09"
+                "reference": "22f66dd65fbd2de9b783ec01f1c504d6f4470037"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/ShurikAg/ArnmWidgetBundle/zipball/b55bc7316d02b88acc6a823af17ef529cf642b09",
-                "reference": "b55bc7316d02b88acc6a823af17ef529cf642b09",
+                "url": "https://github.com/ShurikAg/ArnmWidgetBundle/archive/22f66dd65fbd2de9b783ec01f1c504d6f4470037.zip",
+                "reference": "22f66dd65fbd2de9b783ec01f1c504d6f4470037",
                 "shasum": ""
             },
             "require": {
@@ -363,14 +371,14 @@
                 "iibs/arnm-core": "dev-master",
                 "iibs/arnm-pages": "dev-master"
             },
-            "time": "1349947311",
+            "time": "2012-11-20 09:08:02",
             "type": "library",
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Arnm\\WidgetBundle": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
                     "name": "Alex Agulyansky",
@@ -382,42 +390,94 @@
             "description": "Araneum's widgets bundle"
         },
         {
+            "name": "stfalcon/tinymce-bundle",
+            "version": "v0.2.0",
+            "target-dir": "Stfalcon/Bundle/TinymceBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stfalcon/TinymceBundle",
+                "reference": "v0.2.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/stfalcon/TinymceBundle/zipball/v0.2.0",
+                "reference": "v0.2.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "symfony/symfony": ">=2.0"
+            },
+            "time": "2012-04-19 04:42:05",
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Stfalcon\\Bundle\\TinymceBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stepan Tanasiychuk",
+                    "email": "ceo@stfalcon.com",
+                    "homepage": "http://blog.stfalcon.com"
+                },
+                {
+                    "name": "Igor Negrutsa",
+                    "email": "progi2007@gmail.com",
+                    "homepage": "http://igor-negrutsa.info"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://github.com/stfalcon/TinymceBundle/contributors"
+                }
+            ],
+            "description": "This Bundle integrates TinyMCE WYSIWYG editor into a Symfony2 project.",
+            "keywords": [
+                "wysiwyg",
+                "tinymce"
+            ]
+        },
+        {
             "name": "stof/doctrine-extensions-bundle",
             "version": "dev-master",
             "target-dir": "Stof/DoctrineExtensionsBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stof/StofDoctrineExtensionsBundle",
-                "reference": "773b37310ca244570032541be3c8ab27b814a83f"
+                "reference": "4a17550d8b101c5aafc56c9950149aa189b8402d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/stof/StofDoctrineExtensionsBundle/zipball/773b37310ca244570032541be3c8ab27b814a83f",
-                "reference": "773b37310ca244570032541be3c8ab27b814a83f",
+                "url": "https://github.com/stof/StofDoctrineExtensionsBundle/archive/4a17550d8b101c5aafc56c9950149aa189b8402d.zip",
+                "reference": "4a17550d8b101c5aafc56c9950149aa189b8402d",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
-                "symfony/framework-bundle": "2.1.*",
-                "gedmo/doctrine-extensions": ">=2.3-dev"
+                "symfony/framework-bundle": ">=2.1,<2.3-dev",
+                "gedmo/doctrine-extensions": "2.3.*"
             },
             "suggest": {
                 "doctrine/doctrine-bundle": "*",
                 "doctrine/mongodb-odm-bundle": "2.1.*"
             },
-            "time": "1349111035",
+            "time": "2012-12-13 17:58:07",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.1.x-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Stof\\DoctrineExtensionsBundle": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -445,16 +505,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.1.2",
+            "version": "v2.1.7",
             "source": {
                 "type": "git",
                 "url": "git://github.com/symfony/symfony.git",
-                "reference": "v2.1.2"
+                "reference": "v2.1.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/symfony/zipball/v2.1.2",
-                "reference": "v2.1.2",
+                "url": "https://github.com/symfony/symfony/archive/v2.1.7.zip",
+                "reference": "v2.1.7",
                 "shasum": ""
             },
             "require": {
@@ -501,22 +561,17 @@
                 "doctrine/orm": ">=2.2.3,<2.4-dev",
                 "doctrine/data-fixtures": "1.0.*",
                 "propel/propel1": "dev-master",
-                "monolog/monolog": "dev-master"
+                "monolog/monolog": ">=1.0,<1.3-dev"
             },
-            "time": "2012-09-20 07:13:00",
+            "time": "2013-01-17 21:21:51",
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
-            "installation-source": "dist",
             "autoload": {
                 "psr-0": {
                     "Symfony": "src/",
                     "SessionHandlerInterface": "src/Symfony/Component/HttpFoundation/Resources/stubs"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -538,34 +593,34 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.10.0",
+            "version": "v1.12.1",
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Twig.git",
-                "reference": "v1.10.0"
+                "reference": "v1.12.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Twig/zipball/v1.10.0",
-                "reference": "v1.10.0",
+                "url": "https://github.com/fabpot/Twig/archive/v1.12.1.zip",
+                "reference": "v1.12.1",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "2012-09-28 20:11:39",
+            "time": "2013-01-15 20:03:52",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.10-dev"
+                    "dev-master": "1.12-dev"
                 }
             },
-            "installation-source": "dist",
             "autoload": {
                 "psr-0": {
                     "Twig_": "lib/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3"
             ],
