@@ -64,6 +64,7 @@ class MenuController extends ArnmController
                 return $this->redirect($this->generateUrl('arnm_menus'));
             }
         }
+
         return $this->render('ArnmMenuBundle:Menu:new.html.twig', array(
             'menu' => $menu,
             'form' => $form->createView()
@@ -72,6 +73,8 @@ class MenuController extends ArnmController
 
     /**
      * Shows a from for menu creation
+     *
+     * @param int $id Menu's ID
      *
      * @return Response
      */
@@ -104,6 +107,7 @@ class MenuController extends ArnmController
                 )));
             }
         }
+
         return $this->render('ArnmMenuBundle:Menu:edit.html.twig', array(
             'menu' => $menu,
             'form' => $form->createView()
@@ -111,6 +115,8 @@ class MenuController extends ArnmController
     }
     /**
      * Deletes menu including it's items
+     *
+     * @param int $id Menu's ID
      *
      * @return Response
      */
@@ -180,8 +186,8 @@ class MenuController extends ArnmController
     /**
      * Adds an item to the menu
      *
-     * @param int $id
-     * @param int $parentId
+     * @param int $id       Menu's ID
+     * @param int $parentId Parent item ID
      *
      * @return Response
      */
@@ -219,6 +225,7 @@ class MenuController extends ArnmController
                 )));
             }
         }
+
         return $this->render('ArnmMenuBundle:Menu:newItem.html.twig',
         array(
             'menu' => $menu,
@@ -230,8 +237,8 @@ class MenuController extends ArnmController
     /**
      * Renders and handles submittion of menu item editing form
      *
-     * @param int $id
-     * @param int $itemId
+     * @param int $id     Menu's ID
+     * @param int $itemId Item's ID
      *
      * @return Response
      */
@@ -270,6 +277,7 @@ class MenuController extends ArnmController
                 )));
             }
         }
+
         return $this->render('ArnmMenuBundle:Menu:editItem.html.twig',
         array(
             'menu' => $menu,
@@ -281,8 +289,8 @@ class MenuController extends ArnmController
     /**
      * Deletes Menu Item
      *
-     * @param int $id
-     * @param int $itemId
+     * @param int $id     Menu's ID
+     * @param int $itemId Item's ID
      *
      * @return Response
      */
