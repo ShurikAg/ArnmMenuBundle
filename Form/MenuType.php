@@ -10,47 +10,53 @@ use Symfony\Component\Form\AbstractType;
  */
 class MenuType extends AbstractType
 {
-  public function buildForm(FormBuilderInterface $builder, array $options)
-  {
-    $builder->add('code', 'text', array(
-        'label' => 'menu.form.code.label',
-        'attr' => array(
-            'rel' => 'tooltip', 
-            'title' => 'menu.form.code.help',
-            'class' => 'span4'
-        ), 
-        'translation_domain' => 'menu',
-        'required' => false
-    ));
-    $builder->add('class', 'text', array(
-        'label' => 'menu.form.class.label',
-        'attr' => array(
-            'rel' => 'tooltip', 
-            'title' => 'menu.form.class.help',
-            'class' => 'span4'
-        ), 
-        'translation_domain' => 'menu',
-        'required' => false
-    ));
-  }
-  
-  /**
-   * (non-PHPdoc)
-   * @see Symfony\Component\Form.FormTypeInterface::getName()
-   */
-  public function getName()
-  {
-    return 'menu';
-  }
-  
-  /**
-   * (non-PHPdoc)
-   * @see Symfony\Component\Form.AbstractType::getDefaultOptions()
-   */
-  public function getDefaultOptions(array $options)
-  {
-    return array(
-        'data_class' => 'Arnm\MenuBundle\Entity\Menu'
-    );
-  }
+    /**
+     * {@inheritdoc}
+     * @see Symfony\Component\Form.AbstractType::buildForm()
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('code', 'text',
+            array(
+                'label' => 'menu.form.code.label',
+                'attr' => array(
+                    'rel' => 'tooltip',
+                    'title' => 'menu.form.code.help',
+                    'class' => 'span4'
+                ),
+                'translation_domain' => 'menu',
+                'required' => false
+            ));
+        $builder->add('class', 'text',
+            array(
+                'label' => 'menu.form.class.label',
+                'attr' => array(
+                    'rel' => 'tooltip',
+                    'title' => 'menu.form.class.help',
+                    'class' => 'span4'
+                ),
+                'translation_domain' => 'menu',
+                'required' => false
+            ));
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Symfony\Component\Form.FormTypeInterface::getName()
+     */
+    public function getName()
+    {
+        return 'menu';
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Symfony\Component\Form.AbstractType::getDefaultOptions()
+     */
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'data_class' => 'Arnm\MenuBundle\Entity\Menu'
+        );
+    }
 }

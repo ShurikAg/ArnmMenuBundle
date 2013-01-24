@@ -29,7 +29,7 @@ class PlainMenuController extends ArnmWidgetController
 
         try {
             $widget = $this->getWidgetManager()->findWidgetById($id);
-            if(! ($widget instanceof Widget)) {
+            if (! ($widget instanceof Widget)) {
                 throw new \InvalidArgumentException("Widget was not found by ID.");
             }
             $request = $this->getRequest();
@@ -37,28 +37,28 @@ class PlainMenuController extends ArnmWidgetController
             $menuWidgetObj = new MenuWidget();
             $this->fillDataObject($widget, $menuWidgetObj);
             $form = $this->createForm(new MenuWidgetType(), $menuWidgetObj);
-            if($request->getMethod() == 'GET') {
+            if ($request->getMethod() == 'GET') {
                 $reply['status'] = 'OK';
                 $reply['title'] = $this->get('translator')->trans('default.label.edit') . ": " . $widget->getTitle();
 
                 $reply['body'] = $this->renderView('ArnmMenuBundle:Widgets\Plain:edit.html.twig',
-                array(
-                    'edit_form' => $form->createView()
-                ));
+                    array(
+                        'edit_form' => $form->createView()
+                    ));
                 //form route
                 $updateRoute = 'widget_' . $widget->getBundle() . '_' . $widget->getController() . '_update';
                 $reply['form_action'] = $this->get('router')->generate($updateRoute, array(
                     'id' => $widget->getId()
                 ));
-            } elseif($request->getMethod() == 'POST') {
+            } elseif ($request->getMethod() == 'POST') {
                 $form->bindRequest($request);
 
-                if(! $form->isValid()) {
+                if (! $form->isValid()) {
                     $reply['status'] = 'ERROR';
                     $reply['body'] = $this->renderView('ArnmMenuBundle:Widgets\Plain:edit.html.twig',
-                    array(
-                        'edit_form' => $form->createView()
-                    ));
+                        array(
+                            'edit_form' => $form->createView()
+                        ));
                 } else {
                     //process the form
                     $this->processSaveParams($widget, $menuWidgetObj);
@@ -76,15 +76,15 @@ class PlainMenuController extends ArnmWidgetController
     /**
      * Creates new of updates existing param of the widget
      *
-     * @param Widget $widget
-     * @param MenuWidget $menuWidgetObj
+     * @param Widget     $widget        Widget object itself
+     * @param MenuWidget $menuWidgetObj Object that is used as a data object for widget management
      */
     protected function processSaveParams(Widget $widget, MenuWidget $menuWidgetObj)
     {
         //find the widget
         $paramId = $widget->getParamByName('code');
-        $em = $this->getEntityManager();
-        if($paramId instanceof Param) {
+        $eMgr = $this->getEntityManager();
+        if ($paramId instanceof Param) {
             //update existing
             $paramId->setValue((string) $menuWidgetObj->getMenu()
                 ->getCode());
@@ -97,11 +97,10 @@ class PlainMenuController extends ArnmWidgetController
             $paramId->setWidget($widget);
         }
 
-        $em->persist($paramId);
+        $eMgr->persist($paramId);
 
         $paramTitle = $widget->getParamByName('title');
-        $em = $this->getEntityManager();
-        if($paramTitle instanceof Param) {
+        if ($paramTitle instanceof Param) {
             //update existing
             $paramTitle->setValue((string) $menuWidgetObj->getTitle());
         } else {
@@ -112,25 +111,25 @@ class PlainMenuController extends ArnmWidgetController
             $paramTitle->setWidget($widget);
         }
 
-        $em->persist($paramTitle);
+        $eMgr->persist($paramTitle);
 
-        $em->flush();
+        $eMgr->flush();
     }
 
     /**
      * Fill the object with a data from widget if available
      *
-     * @param Widget $widget
-     * @param MenuWidget $menuWidgetObj
+     * @param Widget     $widget        Widget object itself
+     * @param MenuWidget $menuWidgetObj Object that is used as a data object for widget management
      */
     protected function fillDataObject(Widget $widget, MenuWidget $menuWidgetObj)
     {
         $param = $widget->getParamByName('title');
-        if($param instanceof Param) {
+        if ($param instanceof Param) {
             $menuWidgetObj->setTitle($param->getValue());
         }
         $param = $widget->getParamByName('code');
-        if($param instanceof Param) {
+        if ($param instanceof Param) {
             $menuWidgetObj->setMenu($this->getMenuManager()
                 ->getMenuRepository()
                 ->findOneByCode((string) $param->getValue()));
@@ -147,7 +146,7 @@ class PlainMenuController extends ArnmWidgetController
         $titleParam = $widget->getParamByName('title');
 
         $title = null;
-        if($titleParam instanceof Param) {
+        if ($titleParam instanceof Param) {
             $title = $titleParam->getValue();
         }
 
@@ -160,15 +159,14 @@ class PlainMenuController extends ArnmWidgetController
      */
     public function updateAction($id)
     {
-        // TODO Auto-generated method stub
-
 
     }
 
     /**
      * Renders the menu itself
      *
-     * @param string $menuCode
+     * @param string $menuCode Menu unique code
+     * @param string $title    Optional - title to be used as a title for a widget
      *
      * @return Response
      */
@@ -178,15 +176,15 @@ class PlainMenuController extends ArnmWidgetController
 
         $menu = $menuMgr->getMenuRepository()->findOneByCode($menuCode);
 
-        if(! ($menu instanceof Menu)) {
+        if (! ($menu instanceof Menu)) {
             return new Response("");
         }
 
         $items = $menuMgr->fetchItemsTreeForMenu($menu, false);
-        $items = $menuMgr->markActive($items, $this->getRequest()->getPathInfo());
+        $items = $menuMgr->markActive($items, $this->getRequest()
+            ->getPathInfo());
 
-
-        if(empty($items)) {
+        if (empty($items)) {
             return new Response("");
         }
 
@@ -195,7 +193,7 @@ class PlainMenuController extends ArnmWidgetController
             'items' => $items
         );
 
-        if(! empty($title)) {
+        if (! empty($title)) {
             $params['title'] = $title;
         }
 

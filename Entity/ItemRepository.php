@@ -11,9 +11,9 @@ class ItemRepository extends NestedTreeRepository
 {
     /**
      * Finds a root node for a menu ID
-     * 
+     *
      * @param int $id
-     * 
+     *
      * @return Item
      */
     public function findRootForMenuId($id)
@@ -21,7 +21,7 @@ class ItemRepository extends NestedTreeRepository
         $qb = $this->getRootNodesQueryBuilder()
             ->andWhere('node.menuId = :menuId')
             ->setParameter(':menuId', $id);
-        
+
         return $qb->getQuery()->getSingleResult();
     }
 }

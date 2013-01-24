@@ -13,9 +13,9 @@ class MenuWidget
 {
     /**
      * Title value
-     * 
+     *
      * @var string
-     * 
+     *
      * @Assert\Type(type="string", message="The value {{ value }} is not a valid {{ type }}.")
      * @Assert\MinLength(
      * limit=1,
@@ -23,51 +23,51 @@ class MenuWidget
      * )
      */
     private $title;
-    
+
     /**
      * Menu code to be used in this widget.
-     * 
+     *
      * @var int
-     * 
+     *
      * @Assert\Type(type="object", message="The value {{ value }} is not a valid {{ type }}.")
      * @Assert\NotBlank()
      */
     private $menu;
-    
+
     /**
      * Sets the value of title
-     * 
-     * @param string $html
+     *
+     * @param string $title
      */
     public function setTitle($title)
     {
         $this->title = (string) $title;
     }
-    
+
     /**
      * Gets the value of title
-     * 
+     *
      * @return string
      */
     public function getTitle()
     {
         return $this->title;
     }
-    
+
     /**
      * Sets menu
-     * 
+     *
      * @param Menu $menu
      */
     public function setMenu(Menu $menu = null)
     {
         $this->menu = $menu;
     }
-    
+
     /**
      * Gets menu
-     * 
-     *  @return Arnm\MenuBundle\Entity\Menu
+     *
+     * @return Arnm\MenuBundle\Entity\Menu
      */
     public function getMenu()
     {

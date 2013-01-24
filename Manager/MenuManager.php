@@ -84,6 +84,7 @@ class MenuManager
         if (is_null($this->menuRepository)) {
             $this->menuRepository = $this->getEntityManager()->getRepository('ArnmMenuBundle:Menu');
         }
+
         return $this->menuRepository;
     }
 
@@ -98,6 +99,7 @@ class MenuManager
         if (is_null($this->itemRepository)) {
             $this->itemRepository = $this->getEntityManager()->getRepository('ArnmMenuBundle:Item');
         }
+
         return $this->itemRepository;
     }
 
@@ -122,10 +124,12 @@ class MenuManager
      *
      * @param array  $items   Array of menu items
      * @param string $urlPath PATH path of the url
+     *
+     * @return array The same arry of menu items with marked items as active if any applies.
      */
     public function markActive(array $items = array(), $urlPath = null)
     {
-        if(empty($urlPath)){
+        if (empty($urlPath)) {
             return $items;
         }
 
@@ -137,26 +141,28 @@ class MenuManager
     /**
      * Does the actual job of marking the matching item by URL
      *
-     * @param array  $items   Array of menu items
+     * @param array  &$items  Array of menu items
      * @param string $urlPath Path to match
      *
      * @return boolean
      */
-    private function doMarkMatching(array &$items = array(), $urlPath)
+    private function doMarkMatching(array &$items, $urlPath)
     {
-        foreach ($items as &$item){
-            if($item['url'] === $urlPath) {
+        foreach ($items as &$item) {
+            if ($item['url'] === $urlPath) {
                 $item['current'] = true;
+
                 return true;
             }
 
             $matchFoundInChildren = false;
-            if(isset($item['__children']) && is_array($item['__children'])){
+            if (isset($item['__children']) && is_array($item['__children'])) {
                 $matchFoundInChildren = $this->doMarkMatching($item['__children'], $urlPath);
             }
 
-            if($matchFoundInChildren === true) {
+            if ($matchFoundInChildren === true) {
                 $item['current_parent'] = true;
+
                 return true;
             }
         }
@@ -165,9 +171,9 @@ class MenuManager
     /**
      * Handles the sorting logic
      *
-     * @param int $nodeId
-     * @param int $parentId
-     * @param int $index
+     * @param int $nodeId   Node's ID
+     * @param int $parentId New parent ID
+     * @param int $index    New index in the list under the parent element
      *
      * @throws \InvalidArgumentException
      *

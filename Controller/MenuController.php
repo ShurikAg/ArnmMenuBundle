@@ -46,15 +46,15 @@ class MenuController extends ArnmController
         if ($this->getRequest()->getMethod() === 'POST') {
             $form->bindRequest($this->getRequest());
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getEntityManager();
+                $eMgr = $this->getDoctrine()->getEntityManager();
 
                 //create the root item for this menu
                 $root = new Item();
                 $root->setText($menu->getCode());
                 $root->setMenu($menu);
-                $em->persist($menu);
-                $em->persist($root);
-                $em->flush();
+                $eMgr->persist($menu);
+                $eMgr->persist($root);
+                $eMgr->flush();
 
                 $this->getSession()
                     ->getFlashBag()
@@ -91,11 +91,11 @@ class MenuController extends ArnmController
         if ($this->getRequest()->getMethod() === 'POST') {
             $form->bindRequest($this->getRequest());
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getEntityManager();
+                $eMgr = $this->getDoctrine()->getEntityManager();
 
                 //create the root item for this menu
-                $em->persist($menu);
-                $em->flush();
+                $eMgr->persist($menu);
+                $eMgr->flush();
 
                 $this->getSession()
                     ->getFlashBag()
@@ -129,24 +129,24 @@ class MenuController extends ArnmController
             throw $this->createNotFoundException("Menu was not found!");
         }
 
-        $em = $this->getEntityManager();
-        $em->beginTransaction();
+        $eMgr = $this->getEntityManager();
+        $eMgr->beginTransaction();
 
         try {
             foreach ($menu->getItems() as $item) {
-                $em->remove($item);
+                $eMgr->remove($item);
             }
-            $em->remove($menu);
-            $em->flush();
+            $eMgr->remove($menu);
+            $eMgr->flush();
 
-            $em->commit();
+            $eMgr->commit();
 
             $this->getSession()
                 ->getFlashBag()
                 ->add('notice', $this->get('translator')
                 ->trans('menu.message.delete.success', array(), 'menu'));
         } catch (\Exception $exc) {
-            $em->rollback();
+            $eMgr->rollback();
             $this->getSession()
                 ->getFlashBag()
                 ->add('error', $this->get('translator')
@@ -214,11 +214,11 @@ class MenuController extends ArnmController
         if ($this->getRequest()->getMethod() === 'POST') {
             $form->bindRequest($this->getRequest());
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getEntityManager();
+                $eMgr = $this->getDoctrine()->getEntityManager();
                 $item->setParent($parent);
                 $item->setMenu($menu);
-                $em->persist($item);
-                $em->flush();
+                $eMgr->persist($item);
+                $eMgr->flush();
 
                 return $this->redirect($this->generateUrl('armn_menu', array(
                     'id' => $menu->getId()
@@ -227,11 +227,11 @@ class MenuController extends ArnmController
         }
 
         return $this->render('ArnmMenuBundle:Menu:newItem.html.twig',
-        array(
-            'menu' => $menu,
-            'parent' => $parent,
-            'form' => $form->createView()
-        ));
+            array(
+                'menu' => $menu,
+                'parent' => $parent,
+                'form' => $form->createView()
+            ));
     }
 
     /**
@@ -268,9 +268,9 @@ class MenuController extends ArnmController
         if ($this->getRequest()->getMethod() === 'POST') {
             $form->bindRequest($this->getRequest());
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getEntityManager();
-                $em->persist($item);
-                $em->flush();
+                $eMgr = $this->getDoctrine()->getEntityManager();
+                $eMgr->persist($item);
+                $eMgr->flush();
 
                 return $this->redirect($this->generateUrl('armn_menu', array(
                     'id' => $menu->getId()
@@ -279,11 +279,11 @@ class MenuController extends ArnmController
         }
 
         return $this->render('ArnmMenuBundle:Menu:editItem.html.twig',
-        array(
-            'menu' => $menu,
-            'item' => $item,
-            'form' => $form->createView()
-        ));
+            array(
+                'menu' => $menu,
+                'item' => $item,
+                'form' => $form->createView()
+            ));
     }
 
     /**
@@ -319,10 +319,10 @@ class MenuController extends ArnmController
         if ($this->getMenuManager()
             ->getItemRepository()
             ->childCount($item) === 0) {
-            $em = $this->getEntityManager();
-            $em->remove($item);
-            $em->flush();
-            $em->clear();
+            $eMgr = $this->getEntityManager();
+            $eMgr->remove($item);
+            $eMgr->flush();
+            $eMgr->clear();
 
             $this->getSession()
                 ->getFlashBag()
@@ -343,7 +343,8 @@ class MenuController extends ArnmController
     /**
      * Handles ajax request for sorting of a tree nodes
      *
-     * @param Request $request
+     * @param Request $request HTTP request object
+     * @param int     $id      Id of the item to manage
      *
      * @return Response
      */

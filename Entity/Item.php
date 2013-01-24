@@ -14,7 +14,7 @@ use Arnm\CoreBundle\Entity\Entity;
  * @ORM\Entity
  * @ORM\Table(name="menu_item")
  * @ORM\Entity(repositoryClass="Arnm\MenuBundle\Entity\ItemRepository")
- * 
+ *
  * @Gedmo\Tree(type="nested")
  */
 class Item extends Entity implements Node
@@ -27,14 +27,14 @@ class Item extends Entity implements Node
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
+
     /**
      * @var integer $menuId
      *
      * @ORM\Column(name="menu_id", type="integer")
      */
     private $menuId;
-    
+
     /**
      * @var integer $parentId
      *
@@ -65,15 +65,15 @@ class Item extends Entity implements Node
      * )
      */
     private $url;
-    
+
     /**
      * @var Menu
-     * 
+     *
      * @ORM\ManyToOne(targetEntity="Menu", inversedBy="items")
      * @ORM\JoinColumn(name="menu_id", referencedColumnName="id")
      */
     private $menu;
-    
+
     /**
      * @Gedmo\TreeLeft
      * @ORM\Column(name="lft", type="integer")
@@ -105,7 +105,7 @@ class Item extends Entity implements Node
      * @ORM\OrderBy({"lft" = "ASC"})
      */
     private $children;
-    
+
     /**
      * Constructor
      */
@@ -122,11 +122,10 @@ class Item extends Entity implements Node
     {
         return $this->id;
     }
-    
-    
+
     /**
      * Gets the menu
-     *  
+     *
      * @return Menu
      */
     public function getMenu()
@@ -134,9 +133,9 @@ class Item extends Entity implements Node
         return $this->menu;
     }
 
-	/**
-	 * Sets menu for this item
-	 * 
+    /**
+     * Sets menu for this item
+     *
      * @param Menu $menu
      */
     public function setMenu(Menu $menu)
@@ -144,7 +143,7 @@ class Item extends Entity implements Node
         $this->menu = $menu;
     }
 
-	/**
+    /**
      * Set text of the menu item
      *
      * @param string $text
@@ -180,7 +179,7 @@ class Item extends Entity implements Node
     {
         return $this->url;
     }
-    
+
     /**
      * Set lft
      *
@@ -289,7 +288,17 @@ class Item extends Entity implements Node
     {
         return $this->children;
     }
-    
+
+    /**
+     * Gets the menu ID that this item is part of
+     *
+     * @return int
+     */
+    public function getMenuId()
+    {
+        return $this->menuId;
+    }
+
     /**
      * Retuns string that represents the page.
      *
@@ -299,7 +308,7 @@ class Item extends Entity implements Node
     {
         return $this->getTitle();
     }
-    
+
     /**
      * Set parentId
      *
@@ -309,7 +318,7 @@ class Item extends Entity implements Node
     {
         $this->parentId = $parentId;
     }
-    
+
     /**
      * Get parentId
      *
@@ -319,7 +328,7 @@ class Item extends Entity implements Node
     {
         return $this->parentId;
     }
-    
+
     /**
      * Determines if the node is a root
      *

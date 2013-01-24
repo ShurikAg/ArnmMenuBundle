@@ -23,7 +23,7 @@ class Menu
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
+
     /**
      * @var string $code
      *
@@ -33,7 +33,7 @@ class Menu
      * @Assert\NotBlank()
      */
     private $code;
-    
+
     /**
      * @var string $cssClass
      *
@@ -43,12 +43,12 @@ class Menu
      * @Assert\NotBlank()
      */
     private $class;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Item", mappedBy="menu")
      */
     private $items;
-    
+
     /**
      * Default constructor
      */
@@ -56,7 +56,7 @@ class Menu
     {
         $this->items = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
@@ -66,7 +66,7 @@ class Menu
     {
         return $this->id;
     }
-    
+
     /**
      * Sets the ID
      *
@@ -76,19 +76,21 @@ class Menu
     {
         $this->id = (int) $id;
     }
-    
+
     /**
      * Set code
      *
      * @param string $code
+     *
      * @return Area
      */
     public function setCode($code)
     {
         $this->code = $code;
+
         return $this;
     }
-    
+
     /**
      * Get code
      *
@@ -98,10 +100,10 @@ class Menu
     {
         return $this->code;
     }
-    
-	/**
-	 * Gets css class of the menu
-	 * 
+
+    /**
+     * Gets css class of the menu
+     *
      * @return string
      */
     public function getClass()
@@ -109,30 +111,30 @@ class Menu
         return $this->class;
     }
 
-	/**
-	 * Sets css class for the menu
-	 * 
+    /**
+     * Sets css class for the menu
+     *
      * @param string $class
      */
     public function setClass($class)
     {
         $this->class = $class;
     }
-    
-/**
+
+    /**
      * Add item
      *
-     * @param Item $params
-     * 
+     * @param Item $item
+     *
      * @return Menu
      */
     public function addItem(Item $item)
     {
         $this->items[] = $item;
-        
+
         return $this;
     }
-    
+
     /**
      * Get items
      *

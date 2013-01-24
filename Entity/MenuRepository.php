@@ -1,7 +1,6 @@
 <?php
 namespace Arnm\MenuBundle\Entity;
 
-
 use Doctrine\ORM\EntityRepository;
 /**
  * MenuRepository
