@@ -10,6 +10,7 @@ use Symfony\Component\Form\AbstractType;
  */
 class MenuType extends AbstractType
 {
+
     /**
      * {@inheritdoc}
      * @see Symfony\Component\Form.AbstractType::buildForm()
