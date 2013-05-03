@@ -1,6 +1,7 @@
 <?php
 namespace Arnm\MenuBundle\Entity;
 
+use Gedmo\Translatable\Translatable;
 use Arnm\MenuBundle\Entity\Menu;
 use Gedmo\Tree\Node;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -17,7 +18,7 @@ use Arnm\CoreBundle\Entity\Entity;
  *
  * @Gedmo\Tree(type="nested")
  */
-class Item extends Entity implements Node
+class Item extends Entity implements Node, Translatable
 {
     /**
      * @var integer $id
@@ -44,6 +45,7 @@ class Item extends Entity implements Node
     /**
      * @var string $text
      *
+     * @Gedmo\Translatable
      * @ORM\Column(name="text", type="string", length=255)
      *
      * @Assert\NotBlank()
@@ -105,6 +107,14 @@ class Item extends Entity implements Node
      * @ORM\OrderBy({"lft" = "ASC"})
      */
     private $children;
+
+    /**
+     * @Gedmo\Locale
+     *
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     */
+    private $locale;
 
     /**
      * Constructor
@@ -287,6 +297,11 @@ class Item extends Entity implements Node
     public function getChildren()
     {
         return $this->children;
+    }
+
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
     }
 
     /**
