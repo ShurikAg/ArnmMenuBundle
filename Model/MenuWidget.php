@@ -17,9 +17,9 @@ class MenuWidget
      * @var string
      *
      * @Assert\Type(type="string", message="The value {{ value }} is not a valid {{ type }}.")
-     * @Assert\MinLength(
-     * limit=1,
-     * message="Title must be at least {{ limit }} characters or empty."
+     * @Assert\Length(
+     * min=1,
+     * minMessage="Title must be at least {{ limit }} characters or empty."
      * )
      */
     private $title;

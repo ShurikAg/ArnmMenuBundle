@@ -49,9 +49,9 @@ class Item extends Entity implements Node, Translatable
      * @ORM\Column(name="text", type="string", length=255)
      *
      * @Assert\NotBlank()
-     * @Assert\MinLength(
-     * limit=3,
-     * message="Title must be at least {{ limit }} characters."
+     * @Assert\Length(
+     * min=3,
+     * minMessage="Title must be at least {{ limit }} characters."
      * )
      */
     private $text;
@@ -61,9 +61,9 @@ class Item extends Entity implements Node, Translatable
      * @ORM\Column(name="url", type="string", length=255, nullable=true)
      *
      * @Assert\Type(type="string", message="The value {{ value }} is not a valid {{ type }}.")
-     * @Assert\MinLength(
-     * limit=1,
-     * message="Slug must be at least {{ limit }} characters."
+     * @Assert\Length(
+     * min=1,
+     * minMessage="Slug must be at least {{ limit }} characters."
      * )
      */
     private $url;
