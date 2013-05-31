@@ -71,7 +71,7 @@ class MenuManager
      */
     protected function getEntityManager()
     {
-        return $this->getDoctrine()->getEntityManager();
+        return $this->getDoctrine()->getManager();
     }
 
     /**
