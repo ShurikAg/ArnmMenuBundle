@@ -17,28 +17,28 @@ class MenuType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('code', 'text',
-            array(
-                'label' => 'menu.form.code.label',
-                'attr' => array(
-                    'rel' => 'tooltip',
-                    'title' => 'menu.form.code.help',
-                    'class' => 'span4'
-                ),
+        $builder->add('code', 'text', array(
+            'label' => 'menu.form.code.label',
+            'attr' => array(
+                'data-toggle' => 'popover',
+                'content' => 'menu.form.code.help',
                 'translation_domain' => 'menu',
-                'required' => false
-            ));
-        $builder->add('class', 'text',
-            array(
-                'label' => 'menu.form.class.label',
-                'attr' => array(
-                    'rel' => 'tooltip',
-                    'title' => 'menu.form.class.help',
-                    'class' => 'span4'
-                ),
+                'class' => 'form-control'
+            ),
+            'translation_domain' => 'menu',
+            'required' => false
+        ));
+        $builder->add('class', 'text', array(
+            'label' => 'menu.form.class.label',
+            'attr' => array(
+                'data-toggle' => 'popover',
+            	'content' => 'menu.form.class.help',
                 'translation_domain' => 'menu',
-                'required' => false
-            ));
+                'class' => 'form-control'
+            ),
+            'translation_domain' => 'menu',
+            'required' => false
+        ));
     }
 
     /**

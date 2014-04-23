@@ -1,7 +1,6 @@
 <?php
 namespace Arnm\MenuBundle\Entity;
 
-use Gedmo\Translatable\Translatable;
 use Arnm\MenuBundle\Entity\Menu;
 use Gedmo\Tree\Node;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -18,7 +17,7 @@ use Arnm\CoreBundle\Entity\Entity;
  *
  * @Gedmo\Tree(type="nested")
  */
-class Item extends Entity implements Node, Translatable
+class Item extends Entity implements Node
 {
     /**
      * @var integer $id
@@ -45,7 +44,6 @@ class Item extends Entity implements Node, Translatable
     /**
      * @var string $text
      *
-     * @Gedmo\Translatable
      * @ORM\Column(name="text", type="string", length=255)
      *
      * @Assert\NotBlank()

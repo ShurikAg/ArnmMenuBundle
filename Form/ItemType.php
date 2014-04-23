@@ -16,28 +16,28 @@ class ItemType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('text', 'text',
-            array(
-                'label' => 'menu.item.form.text.label',
-                'attr' => array(
-                    'rel' => 'tooltip',
-                    'title' => 'menu.item.form.text.help',
-                    'class' => 'span4'
-                ),
+        $builder->add('text', 'text', array(
+            'label' => 'menu.item.form.text.label',
+            'attr' => array(
+                'data-toggle' => 'popover',
+                'content' => 'menu.item.form.text.help',
                 'translation_domain' => 'menu',
-                'required' => false
-            ));
-        $builder->add('url', 'text',
-            array(
-                'label' => 'menu.item.form.url.label',
-                'attr' => array(
-                    'rel' => 'tooltip',
-                    'title' => 'menu.item.form.url.help',
-                    'class' => 'span4'
-                ),
+                'class' => 'form-control'
+            ),
+            'translation_domain' => 'menu',
+            'required' => false
+        ));
+        $builder->add('url', 'text', array(
+            'label' => 'menu.item.form.url.label',
+            'attr' => array(
+                'data-toggle' => 'popover',
+                'content' => 'menu.item.form.url.help',
                 'translation_domain' => 'menu',
-                'required' => false
-            ));
+                'class' => 'form-control'
+            ),
+            'translation_domain' => 'menu',
+            'required' => false
+        ));
     }
 
     /**

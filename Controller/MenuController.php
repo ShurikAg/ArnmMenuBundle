@@ -44,7 +44,7 @@ class MenuController extends ArnmController
         $form = $this->createForm(new MenuType(), $menu);
 
         if ($this->getRequest()->getMethod() === 'POST') {
-            $form->bindRequest($this->getRequest());
+            $form->bind($this->getRequest());
             if ($form->isValid()) {
                 $eMgr = $this->getDoctrine()->getEntityManager();
 
@@ -89,7 +89,7 @@ class MenuController extends ArnmController
         $form = $this->createForm(new MenuType(), $menu);
 
         if ($this->getRequest()->getMethod() === 'POST') {
-            $form->bindRequest($this->getRequest());
+            $form->bind($this->getRequest());
             if ($form->isValid()) {
                 $eMgr = $this->getDoctrine()->getEntityManager();
 
@@ -212,7 +212,7 @@ class MenuController extends ArnmController
         //create form
         $form = $this->createForm(new ItemType(), $item);
         if ($this->getRequest()->getMethod() === 'POST') {
-            $form->bindRequest($this->getRequest());
+            $form->bind($this->getRequest());
             if ($form->isValid()) {
                 $eMgr = $this->getDoctrine()->getEntityManager();
                 $item->setParent($parent);
@@ -266,7 +266,7 @@ class MenuController extends ArnmController
         //create form
         $form = $this->createForm(new ItemType(), $item);
         if ($this->getRequest()->getMethod() === 'POST') {
-            $form->bindRequest($this->getRequest());
+            $form->bind($this->getRequest());
             if ($form->isValid()) {
                 $eMgr = $this->getDoctrine()->getEntityManager();
                 $eMgr->persist($item);
