@@ -1,6 +1,8 @@
 <?php
 namespace Arnm\MenuBundle\Controller\Widgets;
 
+use Symfony\Component\Form\FormError;
+
 use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -21,56 +23,61 @@ class PlainMenuController extends ArnmWidgetController
      * {@inheritdoc}
      * @see Arnm\WidgetBundle\Controllers.ArnmWidgetController::editAction()
      */
-    public function editAction($id)
+    public function editAction()
     {
-        $this->validateRequest();
+        //create the form
+        $menuWidgetObj = new MenuWidget();
+        $form = $this->createForm(new MenuWidgetType(), $menuWidgetObj);
 
-        $reply = array();
+        return $this->render('ArnmMenuBundle:Widgets\Plain:edit.html.twig', array(
+            'edit_form' => $form->createView()
+        ));
+    }
 
-        try {
-            $widget = $this->getWidgetManager()->findWidgetById($id);
-            if (! ($widget instanceof Widget)) {
-                throw new \InvalidArgumentException("Widget was not found by ID.");
-            }
-            $request = $this->getRequest();
-            //create the form
-            $menuWidgetObj = new MenuWidget();
-            $this->fillDataObject($widget, $menuWidgetObj);
-            $form = $this->createForm(new MenuWidgetType(), $menuWidgetObj);
-            if ($request->getMethod() == 'GET') {
-                $reply['status'] = 'OK';
-                $reply['title'] = $this->get('translator')->trans('default.label.edit') . ": " . $widget->getTitle();
-
-                $reply['body'] = $this->renderView('ArnmMenuBundle:Widgets\Plain:edit.html.twig',
-                    array(
-                        'edit_form' => $form->createView()
-                    ));
-                //form route
-                $updateRoute = 'widget_' . $widget->getBundle() . '_' . $widget->getController() . '_update';
-                $reply['form_action'] = $this->get('router')->generate($updateRoute, array(
-                    'id' => $widget->getId()
-                ));
-            } elseif ($request->getMethod() == 'POST') {
-                $form->bindRequest($request);
-
-                if (! $form->isValid()) {
-                    $reply['status'] = 'ERROR';
-                    $reply['body'] = $this->renderView('ArnmMenuBundle:Widgets\Plain:edit.html.twig',
-                        array(
-                            'edit_form' => $form->createView()
-                        ));
-                } else {
-                    //process the form
-                    $this->processSaveParams($widget, $menuWidgetObj);
-                    $reply['status'] = 'OK';
-                }
-            }
-        } catch (\Exception $e) {
-            $reply['status'] = 'FAILED';
-            $reply['reson'] = $e->getMessage();
+    /**
+     * {@inheritdoc}
+     * @see Arnm\WidgetBundle\Controllers.ArnmWidgetController::updateAction()
+     */
+    public function updateAction($id, Request $request)
+    {
+        $widget = $this->getWidgetManager()->findWidgetById($id);
+        if (!($widget instanceof Widget)) {
+            throw $this->createNotFoundException("Widget with id: '" . $id . "' not found!");
         }
 
-        return $this->createResponse($reply);
+        $menuWidgetObj = new MenuWidget();
+        $form = $this->createForm(new MenuWidgetType(), $menuWidgetObj);
+
+        $data = $this->extractArrayFromRequest($request);
+
+        $form->bind($data);
+        if (!$form->isValid()) {
+            $response = array('error' => 'validation', 'errors' => array());
+            $errors = $form->getErrors();
+            foreach ($errors as $key => $error) {
+                if ($error instanceof FormError) {
+                    $response['errors'][$key] = $error->getMessage();
+                }
+            }
+
+            return $this->createResponse($response);
+        }
+
+        $this->processSaveParams($widget, $menuWidgetObj);
+
+        return $this->createResponse(array('OK'));
+    }
+
+    /**
+     * {@inheritdoc}
+     * @see Arnm\WidgetBundle\Controllers.ArnmWidgetController::getConfigFields()
+     */
+    public function getConfigFields()
+    {
+        return array(
+            'title',
+            'menu'
+        );
     }
 
     /**
@@ -82,18 +89,16 @@ class PlainMenuController extends ArnmWidgetController
     protected function processSaveParams(Widget $widget, MenuWidget $menuWidgetObj)
     {
         //find the widget
-        $paramId = $widget->getParamByName('code');
+        $paramId = $widget->getParamByName('menu');
         $eMgr = $this->getEntityManager();
         if ($paramId instanceof Param) {
             //update existing
-            $paramId->setValue((string) $menuWidgetObj->getMenu()
-                ->getCode());
+            $paramId->setValue((string) $menuWidgetObj->getMenu()->getId());
         } else {
             //create new
             $paramId = new Param();
-            $paramId->setName('code');
-            $paramId->setValue((string) $menuWidgetObj->getMenu()
-                ->getCode());
+            $paramId->setName('menu');
+            $paramId->setValue((string) $menuWidgetObj->getMenu()->getId());
             $paramId->setWidget($widget);
         }
 
@@ -117,32 +122,12 @@ class PlainMenuController extends ArnmWidgetController
     }
 
     /**
-     * Fill the object with a data from widget if available
-     *
-     * @param Widget     $widget        Widget object itself
-     * @param MenuWidget $menuWidgetObj Object that is used as a data object for widget management
-     */
-    protected function fillDataObject(Widget $widget, MenuWidget $menuWidgetObj)
-    {
-        $param = $widget->getParamByName('title');
-        if ($param instanceof Param) {
-            $menuWidgetObj->setTitle($param->getValue());
-        }
-        $param = $widget->getParamByName('code');
-        if ($param instanceof Param) {
-            $menuWidgetObj->setMenu($this->getMenuManager()
-                ->getMenuRepository()
-                ->findOneByCode((string) $param->getValue()));
-        }
-    }
-
-    /**
      * {@inheritdoc}
      * @see Arnm\WidgetBundle\Controllers.ArnmWidgetController::renderAction()
      */
     public function renderAction(Widget $widget)
     {
-        $codeParam = $widget->getParamByName('code');
+        $codeParam = $widget->getParamByName('menu');
         $titleParam = $widget->getParamByName('title');
 
         $title = null;
@@ -151,15 +136,6 @@ class PlainMenuController extends ArnmWidgetController
         }
 
         return $this->renderMenuAction($codeParam->getValue(), $title);
-    }
-
-    /**
-     * {@inheritdoc}
-     * @see Arnm\WidgetBundle\Controllers.ArnmWidgetController::updateAction()
-     */
-    public function updateAction($id)
-    {
-
     }
 
     /**
@@ -176,13 +152,12 @@ class PlainMenuController extends ArnmWidgetController
 
         $menu = $menuMgr->getMenuRepository()->findOneByCode($menuCode);
 
-        if (! ($menu instanceof Menu)) {
+        if (!($menu instanceof Menu)) {
             return new Response("");
         }
 
         $items = $menuMgr->fetchItemsTreeForMenu($menu, false);
-        $items = $menuMgr->markActive($items, $this->getRequest()
-            ->getPathInfo());
+        $items = $menuMgr->markActive($items, $this->getRequest()->getPathInfo());
 
         if (empty($items)) {
             return new Response("");
@@ -193,7 +168,7 @@ class PlainMenuController extends ArnmWidgetController
             'items' => $items
         );
 
-        if (! empty($title)) {
+        if (!empty($title)) {
             $params['title'] = $title;
         }
 
