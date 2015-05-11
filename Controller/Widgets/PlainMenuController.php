@@ -150,7 +150,7 @@ class PlainMenuController extends ArnmWidgetController
     {
         $menuMgr = $this->getMenuManager();
 
-        $menu = $menuMgr->getMenuRepository()->findOneByCode($menuCode);
+        $menu = $menuMgr->getMenuRepository()->findOneById($menuCode);
 
         if (!($menu instanceof Menu)) {
             return new Response("");
