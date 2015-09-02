@@ -135,7 +135,24 @@ class PlainMenuController extends ArnmWidgetController
             $title = $titleParam->getValue();
         }
 
-        return $this->renderMenuAction($codeParam->getValue(), $title);
+        return $this->renderMenuByIdAction($codeParam->getValue(), $title);
+    }
+
+    /**
+     * Renders the menu itself
+     *
+     * @param int    $menuId Menu ID
+     * @param string $title  Optional - title to be used as a title for a widget
+     *
+     * @return Response
+     */
+    public function renderMenuByIdAction($menuId, $title = null)
+    {
+        $menuMgr = $this->getMenuManager();
+
+        $menu = $menuMgr->getMenuRepository()->findOneById($menuId);
+
+        return $this->doRenderMenu($menu);
     }
 
     /**
@@ -150,8 +167,20 @@ class PlainMenuController extends ArnmWidgetController
     {
         $menuMgr = $this->getMenuManager();
 
-        $menu = $menuMgr->getMenuRepository()->findOneById($menuCode);
+        $menu = $menuMgr->getMenuRepository()->findOneByCode($menuCode);
 
+        return $this->doRenderMenu($menu);
+    }
+
+    /**
+     * Renders the menu
+     *
+     * @param Menu $menu
+     *
+     * @return Response
+     */
+    protected function doRenderMenu(Menu $menu = null)
+    {
         if (!($menu instanceof Menu)) {
             return new Response("");
         }
