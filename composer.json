@@ -1,25 +1,25 @@
 {
-    "name": "iibs/arnm-menu",
-    "description": "Araneum's menu bundle",
-    "version": "1.0.5",
-    "authors": [
-        {
-            "name": "Alex Agulyansky",
-            "email": "alex@iibspro.com",
-            "homepage": "http://www.iibspro.com",
-            "role": "Dev Lead"
-        }
-    ],
-    "autoload": {
-        "psr-0": { "Arnm\\MenuBundle": "" }
-    },
-    "target-dir": "Arnm/MenuBundle",
-    "require": {
-	"php": ">=5.3.9",
-        "symfony/symfony": "2.7.*",
-        "stof/doctrine-extensions-bundle": "dev-master",
-        "iibs/arnm-core": "1.0.*",
-        "iibs/arnm-pages": "1.0.*",
-        "iibs/arnm-widget": "1.0.*"
+  "name" : "iibs/arnm-menu",
+  "description" : "Araneum's menu bundle",
+  "version" : "1.0.6",
+  "require" : {
+    "php" : ">=5.3.9",
+    "symfony/symfony" : "2.7.*",
+    "stof/doctrine-extensions-bundle" : "dev-master",
+    "iibs/arnm-core" : "1.0.*",
+    "iibs/arnm-pages" : "1.0.*",
+    "iibs/arnm-widget" : "1.0.*"
+  },
+  "target-dir" : "Arnm/MenuBundle",
+  "authors" : [ {
+    "name" : "Alex Agulyansky",
+    "email" : "alex@iibspro.com",
+    "homepage" : "http://www.iibspro.com",
+    "role" : "Dev Lead"
+  } ],
+  "autoload" : {
+    "psr-0" : {
+      "Arnm\\MenuBundle" : ""
     }
+  }
 }

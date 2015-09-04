@@ -152,7 +152,7 @@ class PlainMenuController extends ArnmWidgetController
 
         $menu = $menuMgr->getMenuRepository()->findOneById($menuId);
 
-        return $this->doRenderMenu($menu);
+        return $this->doRenderMenu($menu, $title);
     }
 
     /**
@@ -169,17 +169,18 @@ class PlainMenuController extends ArnmWidgetController
 
         $menu = $menuMgr->getMenuRepository()->findOneByCode($menuCode);
 
-        return $this->doRenderMenu($menu);
+        return $this->doRenderMenu($menu, $title);
     }
 
     /**
      * Renders the menu
      *
-     * @param Menu $menu
+     * @param Menu   $menu
+     * @param string $title
      *
      * @return Response
      */
-    protected function doRenderMenu(Menu $menu = null)
+    protected function doRenderMenu(Menu $menu = null, $title = null)
     {
         if (!($menu instanceof Menu)) {
             return new Response("");

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2cd705806487d2a8eab0505eb965462f",
+    "hash": "e83ceb3c9d37ce6a27bfc2df054cdb9c",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -593,13 +593,13 @@
             "version": "v2.4.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
-                "reference": "5d330411e27ab0ced67e1e5383ccae975c23c17d"
+                "url": "git@github.com:Atlantic18/DoctrineExtensions.git",
+                "reference": "211af4ba5201c422ee450be82c7044f090c90e39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/5d330411e27ab0ced67e1e5383ccae975c23c17d",
-                "reference": "5d330411e27ab0ced67e1e5383ccae975c23c17d",
+                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/211af4ba5201c422ee450be82c7044f090c90e39",
+                "reference": "211af4ba5201c422ee450be82c7044f090c90e39",
                 "shasum": ""
             },
             "require": {
