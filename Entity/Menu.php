@@ -5,16 +5,26 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Arnm\MenuBundle\Entity\Item;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Gedmo\Blameable\Traits\BlameableEntity;
 /**
  * Menu entity class
  *
  * @ORM\Table(name="menu")
  * @ORM\Entity(repositoryClass="Arnm\MenuBundle\Entity\MenuRepository")
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false)
+ * @Gedmo\Loggable
  *
  * @UniqueEntity("code")
  */
 class Menu
 {
+    use SoftDeleteableEntity;
+    use TimestampableEntity;
+    use BlameableEntity;
+
     /**
      * @var integer $id
      *
@@ -28,6 +38,7 @@ class Menu
      * @var string $code
      *
      * @ORM\Column(name="code", type="string", length=50)
+     * @Gedmo\Versioned
      *
      * @Assert\NotNull()
      * @Assert\NotBlank()
@@ -38,6 +49,7 @@ class Menu
      * @var string $cssClass
      *
      * @ORM\Column(name="class", type="string", length=50)
+     * @Gedmo\Versioned
      *
      * @Assert\NotNull()
      * @Assert\NotBlank()
